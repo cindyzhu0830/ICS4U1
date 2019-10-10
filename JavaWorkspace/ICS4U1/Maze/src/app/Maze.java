@@ -1,15 +1,17 @@
 package app;
 import java.util.*;
-import java.io.File;
+import java.io.*;
 
 public class Maze {
-    static Queue<Integer> q1, q2 = new LinkedList<>();
-    static List<Integer> resultx, resulty = new LinkedList<>();
+    static Queue<Integer> q1 = new LinkedList<>();
+    static Queue<Integer> q2 = new LinkedList<>();
+    static List<Integer> resultx = new LinkedList<>();
+    static List<Integer> resulty = new LinkedList<>();
     static int level[][], prex[][], prey[][], r, c, cx, cy;
     static char[][] ch, copych;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException{
         Scanner sc = new Scanner(System.in);
         r = 7;
         c = 11;
@@ -35,7 +37,7 @@ public class Maze {
 
     }
 
-    static void readIn(){
+    static void readIn() throws FileNotFoundException{
         File maze = new File("C:\\HighSchool\\UHS\\maze.txt");
         Scanner fsc = new Scanner(maze);
         for(int i=0;i<r;i++){
@@ -87,8 +89,9 @@ public class Maze {
 
             }
         }
+        int t1 = q1.poll(), t2 = q2.poll();
 
-        return search(q1.poll(), q2.poll(), vis, ch, level[t1][t2], target);
+        return search(t1, t2, vis, ch, level[t1][t2], target);
     }
 
     public static void printPath(int curX, int curY, int tarX, int tarY) {
