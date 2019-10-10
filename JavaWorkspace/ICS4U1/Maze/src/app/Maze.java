@@ -20,10 +20,11 @@ public class Maze {
         prex = new int[r][c];
         prey = new int[r][c];
         ch = new char[r][c];
-        copych = ch.clone();
+        copych = new char[r][c];
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
                 ch[i][j] = sc.next().charAt(0);
+                copych[i][j] = ch[i][j];
             }
         }
         System.out.println("where do you want to drop the rat? (input 2d coordinates");
@@ -35,6 +36,7 @@ public class Maze {
         printPath(cx, cy, sx, sy);
         draw(copych);
         printGraph(copych);
+        System.out.println();
 
         sx = cx;
         sy = cy;
@@ -42,8 +44,10 @@ public class Maze {
         boolean vis2[][] = new boolean[r][c];
         q1.clear();
         q2.clear();
-        System.out.println(search(cx, cy, vis2, ch, 0, 'X'));
+        System.out.println(search(cx, cy, vis2, copych, 0, 'X'));
         printPath(cx, cy, sx, sy);
+        printGraph(ch);
+        System.out.println();
         draw(ch);
         printGraph(ch);
 
