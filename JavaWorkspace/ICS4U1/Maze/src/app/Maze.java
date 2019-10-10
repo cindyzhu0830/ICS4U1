@@ -1,4 +1,5 @@
 package app;
+
 import java.util.*;
 import java.io.*;
 
@@ -10,8 +11,7 @@ public class Maze {
     static int level[][], prex[][], prey[][], r, c, cx, cy;
     static char[][] ch, copych;
 
-
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         r = 7;
         c = 11;
@@ -26,6 +26,7 @@ public class Maze {
         System.out.println("where do you want to drop the rat? (input 2d coordinates)");
         int sx = sc.nextInt(), sy = sc.nextInt();
         System.out.println("Shortest path to cheese: " + search(sx, sy, vis, ch, 0, 'C'));
+        findPath(cx, cy, sx, sy);
         printGraph(copych);
         System.out.println();
         sx = cx;
@@ -33,15 +34,16 @@ public class Maze {
         q1.clear();
         q2.clear();
         System.out.println("Shortest path to exit: " + search(cx, cy, vis2, copych, 0, 'X'));
+        findPath(cx, cy, sx, sy);
         printGraph(ch);
 
     }
 
-    static void readIn() throws FileNotFoundException{
+    static void readIn() throws FileNotFoundException {
         File maze = new File("C:\\HighSchool\\UHS\\maze.txt");
         Scanner fsc = new Scanner(maze);
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
                 ch[i][j] = fsc.next().charAt(0);
                 copych[i][j] = ch[i][j];
             }
@@ -57,29 +59,10 @@ public class Maze {
             return lv;
         }
         if (x < r - 1 && y < c - 1) {
-            if (!vis[x - 1][y] && ch[x - 1][y] != 'B') {
-                level[x - 1][y] = lv + 1;
-                prex[x - 1][y] = x;
-                prey[x - 1][y] = y;
-                q1.add(x - 1);
-                q2.add(y);
-
-            }
-            if (!vis[x + 1][y] && ch[x + 1][y] != 'B') {
-                level[x + 1][y] = lv + 1;
-                prex[x + 1][y] = x;
-                prey[x + 1][y] = y;
-                q1.add(x + 1);
-                q2.add(y);
-            }
-            if (!vis[x][y - 1] && ch[x][y - 1] != 'B') {
-                level[x][y - 1] = lv + 1;
-                prex[x][y - 1] = x;
-                prey[x][y - 1] = y;
-                q1.add(x);
-                q2.add(y - 1);
-
-            }
+            push(x - 1, y, vis, lv, -1, 0);
+            push(x + 1, y, vis, lv, 1, 0);
+            push(x, y - 1, vis, lv, 0, -1);
+            push(x, y + 1, vis, lv, 0, 1);
             if (!vis[x][y + 1] && ch[x][y + 1] != 'B') {
                 level[x][y + 1] = lv + 1;
                 prex[x][y + 1] = x;
@@ -94,7 +77,7 @@ public class Maze {
         return search(t1, t2, vis, ch, level[t1][t2], target);
     }
 
-    public static void printPath(int curX, int curY, int tarX, int tarY) {
+    public static void findPath(int curX, int curY, int tarX, int tarY) {
         while (curX != tarX || curY != tarY) {
             resultx.add(curX);
             resulty.add(curY);
@@ -114,7 +97,7 @@ public class Maze {
         }
     }
 
-    public static void draw(char[][] chList) { //mutator that changes characters in the graph to draw the path
+    public static void draw(char[][] chList) { // mutator that changes characters in the graph to draw the path
         while (!resultx.isEmpty()) {
             int tx = resultx.remove(resultx.size() - 1);
             int ty = resulty.remove(resulty.size() - 1);
@@ -126,11 +109,11 @@ public class Maze {
         }
     }
 
-    public static void push(int x, int y, boolean[][] visi, int lev, int dx, int dy){
-        if(!visi[x][y]&&ch[x][y]!='B'){
-            level[x][y] = lev+1;
-            prex[x][y] = x-dx;
-            prey[x][y] = y-dy;
+    public static void push(int x, int y, boolean[][] visi, int lev, int dx, int dy) {
+        if (!visi[x][y] && ch[x][y] != 'B') {
+            level[x][y] = lev + 1;
+            prex[x][y] = x - dx;
+            prey[x][y] = y - dy;
             q1.add(x);
             q2.add(y);
 
