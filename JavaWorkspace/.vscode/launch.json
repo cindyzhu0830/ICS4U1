@@ -4,6 +4,27 @@
             "type": "java",
             "name": "CodeLens (Launch) - Maze",
             "request": "launch",
+            "mainClass": "Maze",
+            "projectName": "Maze (2)"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - maze",
+            "request": "launch",
+            "mainClass": "maze",
+            "projectName": "Maze (2)"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - fun",
+            "request": "launch",
+            "mainClass": "app.fun",
+            "projectName": "Maze (2)"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Maze",
+            "request": "launch",
             "mainClass": "app.Maze"
         }
     ]
