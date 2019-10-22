@@ -1,18 +1,19 @@
 
 
-import java.util.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Maze {
     static Queue<Integer> q1 = new LinkedList<>();
     static Queue<Integer> q2 = new LinkedList<>();
     static List<Integer> resultx = new LinkedList<>();
     static List<Integer> resulty = new LinkedList<>();
-    static int level[][], prex[][], prey[][], r, c, cx, cy;
+    static int level[][], prex[][], prey[][], r, c, cx, cy, sx, sy;
     static char[][] ch, copych;
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner sc = new Scanner(System.in);
         r = 7;
         c = 11;
         level = new int[r][c];
@@ -22,34 +23,27 @@ public class Maze {
         copych = new char[r][c];
         boolean vis[][] = new boolean[r][c];
         boolean vis2[][] = new boolean[r][c];
-        readIn();
-        System.out.println("where do you want to drop the rat? (input 2d coordinates)");
-        int sx = sc.nextInt(), sy = sc.nextInt();
+        
+        IO io = new IO();
+        ch = io.reCh();
+        copych = io.reCopych();
+        sx = io.sx; sy = io.sy;
         System.out.println("Shortest path to cheese: " + search(sx, sy, vis, ch, 0, 'C'));
         findPath(cx, cy, sx, sy);
-        printGraph(copych);
-        System.out.println();
+        io.printGraph(copych, resultx, resulty, prex);
+
         sx = cx;
         sy = cy;
         q1.clear();
         q2.clear();
+
         System.out.println("Shortest path to exit: " + search(cx, cy, vis2, copych, 0, 'X'));
         findPath(cx, cy, sx, sy);
-        printGraph(ch);
+        io.printGraph(ch, resultx, resulty, prex);
 
     }
 
-    static void readIn() throws FileNotFoundException {
-        File maze = new File("C:\\HighSchool\\UHS\\maze.txt");
-        Scanner fsc = new Scanner(maze);
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                ch[i][j] = fsc.next().charAt(0);
-                copych[i][j] = ch[i][j];
-            }
-        }
 
-    }
 
     static int search(int x, int y, boolean vis[][], char[][] ch, int lv, char target) {
         vis[x][y] = true;
@@ -87,27 +81,7 @@ public class Maze {
         }
     }
 
-    public static void printGraph(char[][] chList) {
-        draw(chList);
-        for (int i = 0; i < chList.length; i++) {
-            for (int j = 0; j < chList[0].length; j++) {
-                System.out.print(chList[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
 
-    public static void draw(char[][] chList) { // mutator that changes characters in the graph to draw the path
-        while (!resultx.isEmpty()) {
-            int tx = resultx.remove(resultx.size() - 1);
-            int ty = resulty.remove(resulty.size() - 1);
-            if (prex[tx][ty] == tx && chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
-                chList[tx][ty] = '-';
-            } else if (chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
-                chList[tx][ty] = '|';
-            }
-        }
-    }
 
     public static void push(int x, int y, boolean[][] visi, int lev, int dx, int dy) {
         if (!visi[x][y] && ch[x][y] != 'B') {
