@@ -44,13 +44,12 @@ public class PathFinder {
     }
 
     void findPath(int curX, int curY, int tarX, int tarY) {
-        while (curX != tarX || curY != tarY) {
-            resultx.add(curX);
-            resulty.add(curY);
-            int tcx = curX;
-            curX = prex[curX][curY];
-            curY = prey[tcx][curY];
+        if(curX == tarX && curY == tarY) {
+            return;
         }
+        resultx.add(curX);
+        resulty.add(curY);
+        findPath(prex[curX][curY], prey[curX][curY], tarX, tarY);
     }
 
     void push(int x, int y, int lev, int dx, int dy) {

@@ -48,10 +48,8 @@ public class IO {
         while (!resultx.isEmpty()) {
             int tx = resultx.remove(resultx.size() - 1);
             int ty = resulty.remove(resulty.size() - 1);
-            if (prex[tx][ty] == tx && chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
-                chList[tx][ty] = '-';
-            } else if (chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
-                chList[tx][ty] = '|';
+            if (chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
+                chList[tx][ty] = '*';
             }
         }
     }
