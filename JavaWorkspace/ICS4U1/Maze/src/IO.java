@@ -7,7 +7,7 @@ public class IO {
     char[][] ch, copych;
     int r = 7, c = 11;
     
-    public int sx, sy;
+    public int sx = -1, sy = -1;
  
     public IO() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
@@ -15,8 +15,10 @@ public class IO {
         copych = new char[7][11];
         readIn();
         System.out.println("Where do you want to drop the rat?");
-        sx = sc.nextInt();
-        sy = sc.nextInt();
+        do{
+            sx = sc.nextInt();
+            sy = sc.nextInt();
+        }while(!isValid(sx, sy));
 
     }
 
@@ -53,12 +55,24 @@ public class IO {
             }
         }
     }
+    boolean isValid(int x,  int y){
+        boolean valid = true;
+        if(x>=r||x<0||y>=c||y<0){
+            valid = false;
+        }
+        else if(ch[x][y]=='B') valid = false;
+        if(!valid){
+            System.out.println("Position not valid, try again");
+        }
+        return valid;
+    }
     char[][] reCh(){
         return ch;
     }
     char[][] reCopych(){
         return copych;
     }
+
 
 
 }

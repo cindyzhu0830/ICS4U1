@@ -34,6 +34,10 @@ public class PathFinder {
         push(x + 1, y, lv, 1, 0);
         push(x, y - 1, lv, 0, -1);
         push(x, y + 1, lv, 0, 1);
+        if(q1.isEmpty()){
+            System.out.println("No path available");
+            return -1;
+        }
         int t1 = q1.poll(), t2 = q2.poll();
 
         return search(t1, t2, level[t1][t2], target);
