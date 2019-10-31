@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Scanner;
 
 public class IO {
@@ -34,25 +33,7 @@ public class IO {
 
     }
 
-    void printGraph(char[][] chList, List<Integer> resultx, List<Integer> resulty, int[][] prex) {
-        draw(chList, resultx, resulty, prex);
-        for (int i = 0; i < chList.length; i++) {
-            for (int j = 0; j < chList[0].length; j++) {
-                System.out.print(chList[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
 
-    void draw(char[][] chList, List<Integer> resultx, List<Integer> resulty, int[][] prex) { // mutator that changes characters in the graph to draw the path
-        while (!resultx.isEmpty()) {
-            int tx = resultx.remove(resultx.size() - 1);
-            int ty = resulty.remove(resulty.size() - 1);
-            if (chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
-                chList[tx][ty] = '*';
-            }
-        }
-    }
     boolean isValid(int x,  int y){
         boolean valid = true;
         if(x>=r||x<0||y>=c||y<0){
@@ -64,13 +45,6 @@ public class IO {
         }
         return valid;
     }
-    char[][] reCh(){
-        return ch;
-    }
-    char[][] reCopych(){
-        return copych;
-    }
-
 
 
 }

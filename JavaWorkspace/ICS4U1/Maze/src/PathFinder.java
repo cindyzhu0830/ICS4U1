@@ -12,7 +12,8 @@ public class PathFinder {
     boolean vis[][];
     int cx, cy, rl, cl;
     char chl[][];
-     public PathFinder(int r, int c, int sx, int sy,  char[][] ch, char target){
+    int r = 7, c = 11;
+     public PathFinder( int sx, int sy,  char[][] ch, char target){
         level = new int[r][c];
         vis = new boolean[r][c];
         prex = new int[r][c];
@@ -22,6 +23,7 @@ public class PathFinder {
         chl = ch;
         System.out.println("the shortest path is:" + search(sx, sy, 0, target));
         findPath(cx, cy, sx, sy);    
+        printGraph(ch, resultx, resulty,prex);
     }
     int search(int x, int y,  int lv, char target) {
         vis[x][y] = true;
@@ -60,6 +62,25 @@ public class PathFinder {
             q1.add(x);
             q2.add(y);
 
+        }
+    }
+    void printGraph(char[][] chList, List<Integer> resultx, List<Integer> resulty, int[][] prex) {
+        draw(chList, resultx, resulty, prex);
+        for (int i = 0; i < chList.length; i++) {
+            for (int j = 0; j < chList[0].length; j++) {
+                System.out.print(chList[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    void draw(char[][] chList, List<Integer> resultx, List<Integer> resulty, int[][] prex) { // mutator that changes characters in the graph to draw the path
+        while (!resultx.isEmpty()) {
+            int tx = resultx.remove(resultx.size() - 1);
+            int ty = resulty.remove(resulty.size() - 1);
+            if (chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
+                chList[tx][ty] = '*';
+            }
         }
     }
     
