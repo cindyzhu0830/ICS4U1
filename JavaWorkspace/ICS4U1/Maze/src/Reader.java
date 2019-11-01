@@ -2,16 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class IO {
+public class Reader {
     char[][] ch, copych;
-    int r = 7, c = 11;
+    int r = 8, c = 12;
     
     public int sx = -1, sy = -1;
  
-    public IO() throws FileNotFoundException {
+    public Reader() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
-        ch = new char[7][11];
-        copych = new char[7][11];
+        ch = new char[r][c];
+        copych = new char[r][c];
         readIn();
         System.out.println("Where do you want to drop the rat?");
         do{
@@ -22,7 +22,7 @@ public class IO {
     }
 
     void readIn() throws FileNotFoundException {
-        File maze = new File("C:\\HighSchool\\UHS\\maze.txt");
+        File maze = new File("C:\\HighSchool\\UHS\\mazefile1.txt");
         Scanner fsc = new Scanner(maze);
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {

@@ -12,14 +12,12 @@ public class PathFinder {
     boolean vis[][];
     int cx, cy, rl, cl;
     char chl[][];
-    int r = 7, c = 11;
+    int r = 8, c = 12;
      public PathFinder( int sx, int sy,  char[][] ch, char target){
         level = new int[r][c];
         vis = new boolean[r][c];
         prex = new int[r][c];
         prey = new int[r][c];
-        rl = r;
-        cl = c;
         chl = ch;
         System.out.println("the shortest path is:" + search(sx, sy, 0, target));
         findPath(cx, cy, sx, sy);    
@@ -55,7 +53,7 @@ public class PathFinder {
     }
 
     void push(int x, int y, int lev, int dx, int dy) {
-        if (x < rl && y < cl && !vis[x][y] && chl[x][y] != 'B') {
+        if (x < r && y < c && !vis[x][y] && chl[x][y] != 'B') {
             level[x][y] = lev + 1;
             prex[x][y] = x - dx;
             prey[x][y] = y - dy;
