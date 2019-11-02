@@ -3,29 +3,31 @@ import java.util.List;
 import java.util.Queue;
 
 public class PathFinder {
-   
-    Queue<Integer> q1 = new LinkedList<>();
-    Queue<Integer> q2 = new LinkedList<>();
-    List<Integer> resultx = new LinkedList<>();
-    List<Integer> resulty = new LinkedList<>();
-    int level[][], prex[][], prey[][];
+
+    Queue<Integer> qx = new LinkedList<>();
+    Queue<Integer> qy = new LinkedList<>();
+    List<Integer> pathx = new LinkedList<>();
+    List<Integer> pathy = new LinkedList<>();
+    int level[][], par[][][];
     boolean vis[][];
-    int cx, cy, rl, cl;
-    char chl[][];
+    int cx, cy;
+    char localMap[][];
     int r = 8, c = 12;
-     public PathFinder( int sx, int sy,  char[][] ch, char target){
+
+    public PathFinder(int sx, int sy, char[][] map, char target) {
         level = new int[r][c];
         vis = new boolean[r][c];
-        prex = new int[r][c];
-        prey = new int[r][c];
-        chl = ch;
+        par = new int[r][c][2];
+        localMap = map;
+        drawRat(sx, sy);
         System.out.println("the shortest path is:" + search(sx, sy, 0, target));
-        findPath(cx, cy, sx, sy);    
-        printGraph(ch, resultx, resulty,prex);
+        findPath(cx, cy, sx, sy);
+        printGraph();
     }
-    int search(int x, int y,  int lv, char target) {
+
+    int search(int x, int y, int lv, char target) {
         vis[x][y] = true;
-        if (chl[x][y] == target) {
+        if (localMap[x][y] == target) {
             cx = x;
             cy = y;
             return lv;
@@ -34,52 +36,57 @@ public class PathFinder {
         push(x + 1, y, lv, 1, 0);
         push(x, y - 1, lv, 0, -1);
         push(x, y + 1, lv, 0, 1);
-        if(q1.isEmpty()){
+        if (qx.isEmpty()) {
             System.out.println("No path available");
             return -1;
         }
-        int t1 = q1.poll(), t2 = q2.poll();
+        int t1 = qx.poll(), t2 = qy.poll();
 
         return search(t1, t2, level[t1][t2], target);
     }
 
     void findPath(int curX, int curY, int tarX, int tarY) {
-        if(curX == tarX && curY == tarY) {
+        if (curX == tarX && curY == tarY) {
             return;
         }
-        resultx.add(curX);
-        resulty.add(curY);
-        findPath(prex[curX][curY], prey[curX][curY], tarX, tarY);
+        pathx.add(curX);
+        pathy.add(curY);
+        findPath(par[curX][curY][0], par[curX][curY][1], tarX, tarY);
     }
 
     void push(int x, int y, int lev, int dx, int dy) {
-        if (x < r && y < c && !vis[x][y] && chl[x][y] != 'B') {
+        if (x < r && y < c && !vis[x][y] && localMap[x][y] != 'B') {
             level[x][y] = lev + 1;
-            prex[x][y] = x - dx;
-            prey[x][y] = y - dy;
-            q1.add(x);
-            q2.add(y);
+            par[x][y][0] = x - dx;
+            par[x][y][1] = y - dy;
+            qx.add(x);
+            qy.add(y);
 
         }
     }
-    void printGraph(char[][] chList, List<Integer> resultx, List<Integer> resulty, int[][] prex) {
-        draw(chList, resultx, resulty, prex);
-        for (int i = 0; i < chList.length; i++) {
-            for (int j = 0; j < chList[0].length; j++) {
-                System.out.print(chList[i][j] + " ");
+
+    void printGraph() {
+        draw();
+        for (int i = 0; i < localMap.length; i++) {
+            for (int j = 0; j < localMap[0].length; j++) {
+                System.out.print(localMap[i][j] + " ");
             }
             System.out.println();
         }
     }
 
-    void draw(char[][] chList, List<Integer> resultx, List<Integer> resulty, int[][] prex) { // mutator that changes characters in the graph to draw the path
-        while (!resultx.isEmpty()) {
-            int tx = resultx.remove(resultx.size() - 1);
-            int ty = resulty.remove(resulty.size() - 1);
-            if (chList[tx][ty] != 'C' && chList[tx][ty] != 'X') {
-                chList[tx][ty] = '*';
+    void draw() { // mutator that changes characters in the graph to draw the path
+        while (!pathx.isEmpty()) {
+            int tx = pathx.remove(pathx.size() - 1);
+            int ty = pathy.remove(pathy.size() - 1);
+            if (localMap[tx][ty] != 'C' && localMap[tx][ty] != 'X') {
+                localMap[tx][ty] = '*';
             }
         }
     }
-    
+
+    void drawRat(int mx, int my) {
+        localMap[mx][my] = 'R';
+    }
+
 }
