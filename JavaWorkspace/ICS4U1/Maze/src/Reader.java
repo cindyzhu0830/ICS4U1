@@ -42,6 +42,14 @@ public class Reader {
 
     }
 
+    /**
+     * isValid method
+     * Tests whether a user-input start position is valid
+     * @param x the x coordinate of the starting position
+     * @param y the y coordinate of the starting position
+     * @return whether the coordinate is valid
+     */
+
     boolean isValid(int x, int y) {
         boolean valid = true;
         if (x >= r || x < 0 || y >= c || y < 0) {
@@ -53,7 +61,7 @@ public class Reader {
         }
         return valid;
     }
-
+    
     char[][] getMaze() {
         char[][] copy = new char[r][c];
         for (int i = 0; i < map.length; i++) {
