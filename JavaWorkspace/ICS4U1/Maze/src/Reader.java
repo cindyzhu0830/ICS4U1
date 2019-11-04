@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Reader {
     private char[][] map;
-    int r = 8, c = 12;
+    private int r = 8, c = 12;
 
     private int sx = -1, sy = -1;
 

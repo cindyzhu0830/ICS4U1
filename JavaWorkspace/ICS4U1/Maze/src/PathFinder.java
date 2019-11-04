@@ -4,11 +4,11 @@ import java.util.Queue;
 
 public class PathFinder {
     //queues that store x and y coordinates separately and used in BFS
-    Queue<Integer> qx = new LinkedList<>();
-    Queue<Integer> qy = new LinkedList<>();
+    private Queue<Integer> qx = new LinkedList<>();
+    private Queue<Integer> qy = new LinkedList<>();
     //lists used to store coordinates of points on the shortest path
-    List<Integer> pathx = new LinkedList<>();
-    List<Integer> pathy = new LinkedList<>();
+    private List<Integer> pathx = new LinkedList<>();
+    private List<Integer> pathy = new LinkedList<>();
     //arrays used to store the distance from a point to the starting position and the parent of a point respectively
     private int level[][], par[][][];
     //2d boolean array used to check whether a point has been visited
