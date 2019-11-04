@@ -1,13 +1,13 @@
 /*=================================================================
-Program Name: Maze Solver
+Program Name: Maze
 Author: Cindy Zhu
 Date: November 3, 2019
 Programming Language: Java 8
 =================================================================
-Problem Definition 	– Required to find the shortest path to the cheese and exit in a given maze
-Input – a txt file that contains the maze and two integers representing the starting position of the rat
-Output – two mazes with the shortest path to cheese and exit drew on each one
-Process – breadth first search
+Problem Definition 	– Required to find the shortest path to the cheese and exit with a given maze and starting point
+Input – a txt file that contains the maze and two integers representing the starting coordinates of the rat
+Output – length of shortest paths, two mazes with the shortest path to cheese and exit drew on each one
+Process – Mainly breadth first search
 =================================================================
 */ 
 

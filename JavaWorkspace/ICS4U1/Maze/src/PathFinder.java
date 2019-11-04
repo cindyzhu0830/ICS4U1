@@ -3,15 +3,21 @@ import java.util.List;
 import java.util.Queue;
 
 public class PathFinder {
-
+    //queues that store x and y coordinates separately and used in BFS
     Queue<Integer> qx = new LinkedList<>();
     Queue<Integer> qy = new LinkedList<>();
+    //lists used to store coordinates of points on the shortest path
     List<Integer> pathx = new LinkedList<>();
     List<Integer> pathy = new LinkedList<>();
+    //arrays used to store the distance from a point to the starting position and the parent of a point respectively
     int level[][], par[][][];
+    //2d boolean array used to check whether a point has been visited
     boolean vis[][];
+    //int variables used to store current location of the rat
     int cx, cy;
+    //a copy of the maze
     char localMap[][];
+    //dimensions of the maze
     int r = 8, c = 12;
 
     /**
@@ -144,6 +150,7 @@ public class PathFinder {
      * @return void
      */
     void drawRat(int mx, int my) {
+        if(localMap[mx][my]=='.')
         localMap[mx][my] = 'R';
     }//end method drawRat
 
@@ -165,4 +172,4 @@ public class PathFinder {
         return cy;
     }//end method getCy
 
-}
+}//end class PathFinder

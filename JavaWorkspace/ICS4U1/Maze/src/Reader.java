@@ -77,12 +77,24 @@ public class Reader {
         return copy;
     }
 
+    /**getX method
+     * Accessor that passes the value of starting x-coordinate to outside the class
+     * 
+     * @return value of starting x-coordinate
+     */
     int getX(){
         return sx;
-    }
+    }//end method getX
 
+
+      /**getY method
+     * Accessor that passes the value of starting y-coordinate to outside the class
+     * 
+     * @return value of starting y-coordinate
+     */
     int getY(){
         return sy;
-    }
+    }//end method getY
 
-}
+
+}// end class Reader
