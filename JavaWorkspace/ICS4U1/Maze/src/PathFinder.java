@@ -10,15 +10,15 @@ public class PathFinder {
     List<Integer> pathx = new LinkedList<>();
     List<Integer> pathy = new LinkedList<>();
     //arrays used to store the distance from a point to the starting position and the parent of a point respectively
-    int level[][], par[][][];
+    private int level[][], par[][][];
     //2d boolean array used to check whether a point has been visited
-    boolean vis[][];
+    private boolean vis[][];
     //int variables used to store current location of the rat
-    int cx, cy;
+    private int cx, cy;
     //a copy of the maze
-    char localMap[][];
+    private char localMap[][];
     //dimensions of the maze
-    int r = 8, c = 12;
+    private int r = 8, c = 12;
 
     /**
      * paramitized constructor

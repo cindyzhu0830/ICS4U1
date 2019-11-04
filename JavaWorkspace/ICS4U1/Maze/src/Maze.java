@@ -27,7 +27,7 @@ public class Maze {
 	 * @return void
 	 */
     public static void main(String[] args) throws FileNotFoundException {
-        Reader reader = new Reader("C:\\HighSchool\\UHS\\mazefile1.txt");
+        Reader reader = new Reader("H://maze.txt");
         PathFinder cheeser = new PathFinder(reader.getX(), reader.getY(), reader.getMaze(), 'C');
         PathFinder exiter = new PathFinder(cheeser.getCx(), cheeser.getCy(),reader.getMaze(), 'X');
     }//end main method

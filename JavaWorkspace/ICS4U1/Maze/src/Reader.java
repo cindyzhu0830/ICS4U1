@@ -6,7 +6,7 @@ public class Reader {
     private char[][] map;
     int r = 8, c = 12;
 
-    int sx = -1, sy = -1;
+    private int sx = -1, sy = -1;
 
     public Reader() throws FileNotFoundException{
         this("C:\\mazefile1.txt");
