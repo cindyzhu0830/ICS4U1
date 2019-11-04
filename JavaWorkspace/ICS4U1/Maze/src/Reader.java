@@ -24,10 +24,11 @@ public class Reader {
 
     }
 
-    /**
-     * readIn method
-     * Reads a maze in the form of txt file and stores it in a 2d array. 
+    /**readIn method
+     * Reads a maze in the form of txt file and stores it in a 2d array.
+     *  
      * @param fileDir the location of the maze file
+     * 
      * @return void
      */
 
@@ -42,12 +43,13 @@ public class Reader {
 
     }
 
-    /**
-     * isValid method
+    /**isValid method
      * Tests whether a user-input start position is valid
+     * 
      * @param x the x coordinate of the starting position
      * @param y the y coordinate of the starting position
-     * @return whether the coordinate is valid
+     * 
+     * @return true if the position is valid, false if it's not
      */
 
     boolean isValid(int x, int y) {
@@ -62,6 +64,11 @@ public class Reader {
         return valid;
     }
     
+     /**getMaze method
+     * Makes a copy of the original maze an returns the copy to make sure the original maze is not changed
+     * 
+     * @return copy of the original maze
+     */
     char[][] getMaze() {
         char[][] copy = new char[r][c];
         for (int i = 0; i < map.length; i++) {

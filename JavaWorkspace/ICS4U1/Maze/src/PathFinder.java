@@ -25,6 +25,13 @@ public class PathFinder {
         printGraph();
     }
 
+     /**
+     * search method
+     * Recursive breadth first search that finds the shortest path to the target (cheese or exit)
+     * @param x current x-coordinate of the rat
+     * @param y current y-coordinate of the rat
+     * @return the length of the shortest path
+     */
     int search(int x, int y, int lv, char target) {
         vis[x][y] = true;
         if (localMap[x][y] == target) {
@@ -45,6 +52,18 @@ public class PathFinder {
         return search(t1, t2, level[t1][t2], target);
     }
 
+     /**
+     * findPath method
+     * Recursive method that traces back from the end position to the starting point, finds all the points on the shortest path,
+     * and push them into two separate lists, one for x-coordinats and one for y-coordinates, 
+     * as preparation for printing the path later
+     * terminates when reaches the starting position
+     * @param curX the x-coordinate of the current point on the shortest path
+     * @param curY the y-coordinate of the current point on the shortest path
+     * @param tarX the x-coordinate of the start position
+     * @param tarY the y-coordinate of the start position
+     * @return void
+     */
     void findPath(int curX, int curY, int tarX, int tarY) {
         if (curX == tarX && curY == tarY) {
             return;
@@ -54,6 +73,19 @@ public class PathFinder {
         findPath(par[curX][curY][0], par[curX][curY][1], tarX, tarY);
     }
 
+     /**
+     * push method
+     * checks if a point around the current position of the rat is a valid point the rat can go,
+     * if so, set the level of that point to the shortest distance from it to the starting point,
+     * set its parent to the current point,
+     * and pushes its coordinates into two queues for BFS processing in the search method
+     * @param x the x coordinate of the rat's current location
+     * @param y the y coordinate of the rat's current location
+     * @param lev the shortest distance from the current point to the starting position
+     * @param dx the shift in horizontal direction
+     * @param dy the shift in vertical direction
+     * @return void
+     */
     void push(int x, int y, int lev, int dx, int dy) {
         if (x < r && y < c && !vis[x][y] && localMap[x][y] != 'B') {
             level[x][y] = lev + 1;
@@ -65,6 +97,11 @@ public class PathFinder {
         }
     }
 
+     /**
+     * printGraph method
+     * Prints the maze with the shortest path drew on it
+     * @return void
+     */
     void printGraph() {
         draw();
         for (int i = 0; i < localMap.length; i++) {
@@ -75,7 +112,12 @@ public class PathFinder {
         }
     }
 
-    void draw() { // mutator that changes characters in the graph to draw the path
+     /**
+     * draw method
+     * changes the character of every point on the shortest path in the maze to "*" to show the path
+     * @return void
+     */
+    void draw() { 
         while (!pathx.isEmpty()) {
             int tx = pathx.remove(pathx.size() - 1);
             int ty = pathy.remove(pathy.size() - 1);
@@ -85,6 +127,13 @@ public class PathFinder {
         }
     }
 
+     /**
+     * drawRat method
+     * changes the character of the rat's starting position  to 'R' on the maze
+     * @param mx the x coordinate of the starting position
+     * @param my the y coordinate of the starting position
+     * @return void
+     */
     void drawRat(int mx, int my) {
         localMap[mx][my] = 'R';
     }
