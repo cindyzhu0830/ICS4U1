@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 public class Maze {
     
     /**main method:
-	 * This procedural method is called automatically and is used to organize the calling of other methods defined in the class
+	 * This is the main method that makes use of objects of type Reader and PathFinder
 	 * 
 	 * List of Local Variables
 	 * reader - a Reader object that's used to read the input maze from the txt file and convert it into a 2d array
@@ -26,10 +26,9 @@ public class Maze {
 	 * @throws IO Exception	
 	 * @return void
 	 */
-
     public static void main(String[] args) throws FileNotFoundException {
         Reader reader = new Reader("C:\\HighSchool\\UHS\\mazefile1.txt");
-        PathFinder cheeser = new PathFinder(reader.sx, reader.sy, reader.getMaze(), 'C');
-        PathFinder exiter = new PathFinder(cheeser.cx, cheeser.cy,reader.getMaze(), 'X');
-    }//ends main method
-}
+        PathFinder cheeser = new PathFinder(reader.getX(), reader.getY(), reader.getMaze(), 'C');
+        PathFinder exiter = new PathFinder(cheeser.getCx(), cheeser.getCy(),reader.getMaze(), 'X');
+    }//end main method
+}//end Maze class

@@ -77,4 +77,12 @@ public class Reader {
         return copy;
     }
 
+    int getX(){
+        return sx;
+    }
+
+    int getY(){
+        return sy;
+    }
+
 }

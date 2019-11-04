@@ -14,6 +14,15 @@ public class PathFinder {
     char localMap[][];
     int r = 8, c = 12;
 
+    /**
+     * paramitized constructor
+     * Constructs a PathFinder object based on the starting position, the maze taken from an input object and the taret character
+     * @param sx starting x-coordinate of the rat
+     * @param sy starting y-coordinate of the rat
+     * @param target the target character that this object is used to find ('X' for exit and 'C' for cheese)
+     * @param map the maze in the form of 2d array of type char
+     *
+     */
     public PathFinder(int sx, int sy, char[][] map, char target) {
         level = new int[r][c];
         vis = new boolean[r][c];
@@ -23,7 +32,7 @@ public class PathFinder {
         System.out.println("the shortest path is:" + search(sx, sy, 0, target));
         findPath(cx, cy, sx, sy);
         printGraph();
-    }
+    }//end constructor
 
      /**
      * search method
@@ -50,7 +59,7 @@ public class PathFinder {
         int t1 = qx.poll(), t2 = qy.poll();
 
         return search(t1, t2, level[t1][t2], target);
-    }
+    }//end method search
 
      /**
      * findPath method
@@ -71,7 +80,7 @@ public class PathFinder {
         pathx.add(curX);
         pathy.add(curY);
         findPath(par[curX][curY][0], par[curX][curY][1], tarX, tarY);
-    }
+    }//end method findPath
 
      /**
      * push method
@@ -95,7 +104,7 @@ public class PathFinder {
             qy.add(y);
 
         }
-    }
+    }//end method push 
 
      /**
      * printGraph method
@@ -110,7 +119,7 @@ public class PathFinder {
             }
             System.out.println();
         }
-    }
+    }//end method printGraph 
 
      /**
      * draw method
@@ -125,7 +134,7 @@ public class PathFinder {
                 localMap[tx][ty] = '*';
             }
         }
-    }
+    }//end method draw
 
      /**
      * drawRat method
@@ -136,6 +145,24 @@ public class PathFinder {
      */
     void drawRat(int mx, int my) {
         localMap[mx][my] = 'R';
-    }
+    }//end method drawRat
+
+    /**
+     * getCx method
+     * accessor method that return the current x-coordinate of the rat
+     * @return the current x-coordinate of the rat
+     */
+    int getCx(){
+        return cx;
+    }//end method getCx
+
+    /**
+     * getCx method
+     * accessor method that return the current y-coordinate of the rat
+     * @return the current y-coordinate of the rat
+     */
+    int getCy(){
+        return cy;
+    }//end method getCy
 
 }
